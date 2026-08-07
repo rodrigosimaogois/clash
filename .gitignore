@@ -1,0 +1,7 @@
+# Dependências do Node
+node_modules/
+
+# Logs e arquivos do VS Code
+npm-debug.log*
+.vscode/
+.DS_Store
