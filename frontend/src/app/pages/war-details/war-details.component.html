@@ -1,4 +1,4 @@
-<!-- Botões de Idioma Flutuantes (Fora da estrutura do container) -->
+<!-- Floating Language Selector -->
 <div class="lang-switch-floating">
   <button
     type="button"
@@ -16,7 +16,7 @@
 
 <div class="container">
 
-  <!-- Form de Busca por Tag -->
+  <!-- Tag Search Form -->
   <div class="search-box card">
     <h2>{{ t('SEARCH_TITLE') }}</h2>
     <div class="input-group">
@@ -34,10 +34,10 @@
     <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
   </div>
 
-  <!-- Bloco de Resultados -->
+  <!-- Results Block (displayed only without errors and when data is available) -->
   <div *ngIf="warData && !loading && !errorMsg">
 
-    <!-- TABELA 1: Classificação Geral -->
+    <!-- TABLE 1: General Classification -->
     <div class="card">
       <h3 class="main-title">
         {{ warData.warInfo.clanName }} <span class="clan-tag">(#{{ inputTag.replace('#', '').toUpperCase() }})</span>
@@ -55,28 +55,33 @@
         </thead>
         <tbody>
           <tr *ngFor="let clan of warData.warInfo.clansInfos">
+            <!-- NAME & TROPHIES -->
             <td>
               <div class="cell-primary">{{ clan.Name }}</div>
               <div class="cell-sub text-muted">🎖️ {{ clan.ClanScore }}</div>
             </td>
 
+            <!-- CURRENT & AVERAGE -->
             <td>
               <div class="cell-primary">🛡️ {{ clan.Total }}</div>
               <div class="cell-sub text-muted">{{ clan.Average }}</div>
             </td>
 
+            <!-- PLAYERS, USED DECKS & MISSING DECKS -->
             <td>
               <div class="cell-primary">👤 {{ clan.PlayersToday }}/50</div>
               <div class="cell-sub text-success">✔️ {{ clan.DecksToday }}</div>
               <div class="cell-sub text-danger">⏰ {{ clan.MissingAttacksToday }}</div>
             </td>
 
+            <!-- PERSPECTIVE (Min: Red, Estimation: Orange, Max: Green) -->
             <td>
               <div class="cell-sub text-danger">🔴 {{ clan.MinPoints }}</div>
               <div class="cell-sub text-warning">🟠 {{ clan.Estimation }}</div>
               <div class="cell-sub text-success">🟢 {{ clan.MaxPoints }}</div>
             </td>
 
+            <!-- OVERALL (Calculation Breakdown: Current, Boat, Bonus & Total) -->
             <td>
               <div class="cell-sub text-success">✔️ {{ clan.Fame }}</div>
               <div class="cell-sub text-success math-indent">⛵ +{{ clan.BoatPoints }}</div>
@@ -88,7 +93,7 @@
       </table>
     </div>
 
-    <!-- TABELA 2: Decks Faltantes Hoje -->
+    <!-- TABLE 2: Pending Decks Today -->
     <div class="card">
       <div class="card-header">
         <h3>{{ t('TITLE_PENDING_DECKS') }}</h3>
@@ -127,7 +132,7 @@
       </table>
     </div>
 
-    <!-- TABELA 3: Histórico de Faltas -->
+    <!-- TABLE 3: Missed Attacks History -->
     <div class="card">
       <h3>{{ t('TITLE_MISSED_HISTORY') }}</h3>
       <table class="data-table" *ngIf="warData.missed.players && warData.missed.players.length > 0; else noMissed">

@@ -52,9 +52,9 @@ export class WarDetailsComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error('Erro na requisição:', err);
+        console.error('Request error:', err);
         this.errorMsg = this.t('ERR_SEARCH');
-        this.warData = null;
+        this.warData = null; // Clear tables on error
         this.loading = false;
         this.cdr.detectChanges();
       }

@@ -1,4 +1,4 @@
-/* --- Container e Layout Geral --- */
+/* --- Container and General Layout --- */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -18,7 +18,7 @@
   border: 1px solid #e2e8f0;
 }
 
-/* --- Títulos e Cabeçalhos --- */
+/* --- Titles and Headers --- */
 .main-title {
   font-size: 22px;
   font-weight: 700;
@@ -45,7 +45,7 @@
   margin: 0 0 16px 0;
 }
 
-/* --- Busca e Formulário --- */
+/* --- Search Box and Form --- */
 .search-box {
   background: #ffffff;
 }
@@ -114,7 +114,7 @@
   font-weight: 500;
 }
 
-/* --- Tabelas --- */
+/* --- Data Tables --- */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -172,7 +172,7 @@
   background-color: #f1f5f9;
 }
 
-/* --- Células e Tipografia --- */
+/* --- Cells and Typography --- */
 .cell-primary {
   font-size: 14px;
   font-weight: 600;
@@ -187,7 +187,7 @@
   font-weight: 500;
 }
 
-/* --- Cores de Destaque --- */
+/* --- Highlight Colors --- */
 .text-muted { color: #64748b; }
 .text-success { color: #16a34a; }
 .text-danger { color: #dc2626; }
@@ -246,7 +246,7 @@
   font-weight: 700;
 }
 
-/* --- Botão de Idioma Flutuante --- */
+/* --- Floating Language Switcher --- */
 .lang-switch-floating {
   position: absolute;
   top: 16px;
