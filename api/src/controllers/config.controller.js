@@ -10,11 +10,11 @@ export class ConfigController {
 
         // 1. security
         if (adminSecret !== process.env.ADMIN_SECRET) {
-            return res.status(401).json({ error: 'Acesso não autorizado.' });
+            return res.status(401).json({ error: 'Not authorized.' });
         }
 
         if (!newToken) {
-            return res.status(400).json({ error: 'O parâmetro newToken é obrigatório.' });
+            return res.status(400).json({ error: 'The newToken parameter is required.' });
         }
 
         // 2. update memory
@@ -39,13 +39,13 @@ export class ConfigController {
 
             return res.json({
                 success: true,
-                message: 'Token atualizado com sucesso em memória e no arquivo .env!'
+                message: 'Token updated successfully in memory and in the .env file!'
             });
         } catch (error) {
             return res.json({
                 success: true,
-                message: 'Token atualizado apenas na memória de execução.',
-                warning: `Falha ao salvar no arquivo .env: ${error.message}`
+                message: 'Token updated only in execution memory.',
+                warning: `Failed to save to .env file: ${error.message}`
             });
         }
     }
@@ -55,7 +55,7 @@ export class ConfigController {
         const tokenExists = !!process.env.CLASH_API_TOKEN;
         const tokenPreview = tokenExists
             ? `${process.env.CLASH_API_TOKEN}`
-            : 'Não configurado';
+            : 'NNot configured';
 
         return res.json({
             status: 'online',

@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Registra o prefixo /api para as rotas do item
+// /api for all routes
 app.use('/api', itemRoutes);
 app.use('/api', configRouter);
 app.use('/api', warRoutes);
