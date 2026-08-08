@@ -13,7 +13,7 @@ import { WarDetailsResponse } from '../../models/war.model';
   styleUrls: ['./war-details.component.css']
 })
 export class WarDetailsComponent implements OnInit {
-  inputTag: string = 'PUVPQPGL';
+  inputTag: string = '';
   warData: WarDetailsResponse | null = null;
   loading: boolean = false;
   errorMsg: string = '';
@@ -25,7 +25,7 @@ export class WarDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchWar();
+
   }
 
   switchLanguage(lang: Language): void {
