@@ -7,6 +7,7 @@
   color: #1e293b;
   background-color: #f8fafc;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .card {
@@ -26,6 +27,7 @@
   color: #0f172a;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   letter-spacing: -0.02em;
 }
@@ -77,6 +79,7 @@
 
 .input-group input {
   flex: 1;
+  min-width: 0;
   padding: 10px 14px;
   border: none;
   background: #ffffff;
@@ -96,6 +99,7 @@
   font-weight: 600;
   transition: background-color 0.15s ease;
   font-family: inherit;
+  white-space: nowrap;
 }
 
 .input-group button:hover:not(:disabled) {
@@ -119,11 +123,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 12px;
 }
 
 .card-header h3 {
   margin: 0;
+}
+
+/* Wrapper to enable horizontal scroll on small screens */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .data-table {
@@ -134,6 +147,7 @@
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #e2e8f0;
+  white-space: nowrap;
 }
 
 .data-table th, .data-table td {
@@ -253,6 +267,7 @@
   right: 20px;
   display: flex;
   gap: 6px;
+  z-index: 100;
 }
 
 .lang-switch-floating button {
@@ -264,10 +279,58 @@
   color: #475569;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .lang-switch-floating button.active {
   background: #2563eb;
   color: #ffffff;
   border-color: #2563eb;
+}
+
+/* ==========================================================================
+   Mobile & Small Screen Optimizations
+   ========================================================================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px 12px;
+    padding-top: 52px; /* Extra space to accommodate top language buttons */
+  }
+
+  .lang-switch-floating {
+    top: 12px;
+    right: 12px;
+  }
+
+  .card {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+  }
+
+  .main-title {
+    font-size: 18px;
+  }
+
+  .input-group {
+    max-width: 100%;
+  }
+
+  .input-group button {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .data-table th, .data-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .cell-primary {
+    font-size: 13px;
+  }
+
+  .cell-sub {
+    font-size: 12px;
+  }
 }

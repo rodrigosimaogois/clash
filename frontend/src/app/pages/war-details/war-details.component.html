@@ -43,54 +43,56 @@
         {{ warData.warInfo.clanName }} <span class="clan-tag">(#{{ inputTag.replace('#', '').toUpperCase() }})</span>
       </h3>
 
-      <table class="data-table cr-theme-light">
-        <thead>
-          <tr>
-            <th>{{ t('TH_NAME') }}</th>
-            <th>{{ t('TH_CURRENT') }}</th>
-            <th>{{ t('TH_DECKS') }}</th>
-            <th>{{ t('TH_PERSP') }}</th>
-            <th>{{ t('TH_OVERALL') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let clan of warData.warInfo.clansInfos">
-            <!-- NAME & TROPHIES -->
-            <td>
-              <div class="cell-primary">{{ clan.Name }}</div>
-              <div class="cell-sub text-muted">🎖️ {{ clan.ClanScore }}</div>
-            </td>
+      <div class="table-responsive">
+        <table class="data-table cr-theme-light">
+          <thead>
+            <tr>
+              <th>{{ t('TH_NAME') }}</th>
+              <th>{{ t('TH_CURRENT') }}</th>
+              <th>{{ t('TH_DECKS') }}</th>
+              <th>{{ t('TH_PERSP') }}</th>
+              <th>{{ t('TH_OVERALL') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let clan of warData.warInfo.clansInfos">
+              <!-- NAME & TROPHIES -->
+              <td>
+                <div class="cell-primary">{{ clan.Name }}</div>
+                <div class="cell-sub text-muted">🎖️ {{ clan.ClanScore }}</div>
+              </td>
 
-            <!-- CURRENT & AVERAGE -->
-            <td>
-              <div class="cell-primary">🛡️ {{ clan.Total }}</div>
-              <div class="cell-sub text-muted">{{ clan.Average }}</div>
-            </td>
+              <!-- CURRENT & AVERAGE -->
+              <td>
+                <div class="cell-primary">🛡️ {{ clan.Total }}</div>
+                <div class="cell-sub text-muted">{{ clan.Average }}</div>
+              </td>
 
-            <!-- PLAYERS, USED DECKS & MISSING DECKS -->
-            <td>
-              <div class="cell-primary">👤 {{ clan.PlayersToday }}/50</div>
-              <div class="cell-sub text-success">✔️ {{ clan.DecksToday }}</div>
-              <div class="cell-sub text-danger">⏰ {{ clan.MissingAttacksToday }}</div>
-            </td>
+              <!-- PLAYERS, USED DECKS & MISSING DECKS -->
+              <td>
+                <div class="cell-primary">👤 {{ clan.PlayersToday }}/50</div>
+                <div class="cell-sub text-success">✔️ {{ clan.DecksToday }}</div>
+                <div class="cell-sub text-danger">⏰ {{ clan.MissingAttacksToday }}</div>
+              </td>
 
-            <!-- PERSPECTIVE (Min: Red, Estimation: Orange, Max: Green) -->
-            <td>
-              <div class="cell-sub text-danger">🔴 {{ clan.MinPoints }}</div>
-              <div class="cell-sub text-warning">🟠 {{ clan.Estimation }}</div>
-              <div class="cell-sub text-success">🟢 {{ clan.MaxPoints }}</div>
-            </td>
+              <!-- PERSPECTIVE (Min: Red, Estimation: Orange, Max: Green) -->
+              <td>
+                <div class="cell-sub text-danger">🔴 {{ clan.MinPoints }}</div>
+                <div class="cell-sub text-warning">🟠 {{ clan.Estimation }}</div>
+                <div class="cell-sub text-success">🟢 {{ clan.MaxPoints }}</div>
+              </td>
 
-            <!-- OVERALL (Calculation Breakdown: Current, Boat, Bonus & Total) -->
-            <td>
-              <div class="cell-sub text-success">✔️ {{ clan.Fame }}</div>
-              <div class="cell-sub text-success math-indent">⛵ +{{ clan.BoatPoints }}</div>
-              <div class="cell-sub text-info math-indent">+{{ clan.PositionBonus }}</div>
-              <div class="cell-sub text-danger math-total">🎯 {{ clan.FinalPosition }}</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <!-- OVERALL (Calculation Breakdown: Current, Boat, Bonus & Total) -->
+              <td>
+                <div class="cell-sub text-success">✔️ {{ clan.Fame }}</div>
+                <div class="cell-sub text-success math-indent">⛵ +{{ clan.BoatPoints }}</div>
+                <div class="cell-sub text-info math-indent">+{{ clan.PositionBonus }}</div>
+                <div class="cell-sub text-danger math-total">🎯 {{ clan.FinalPosition }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- TABLE 2: Pending Decks Today -->
@@ -102,53 +104,57 @@
         </span>
       </div>
 
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>{{ t('TH_PLAYER') }}</th>
-            <th>{{ t('TH_MISSING_TODAY') }}</th>
-            <th>{{ t('TH_LAST_SEEN') }}</th>
-            <th>{{ t('TH_IN_CLAN') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let player of warData.missingInfo.missingPlayers">
-            <td>{{ player.name }}</td>
-            <td>
-              <span class="badge" [ngClass]="player.missingDecks === 4 ? 'danger' : 'warning'">
-                {{ player.missingDecks }} {{ t('DECKS_LABEL') }}
-              </span>
-            </td>
-            <td>{{ player.lastSeen }}</td>
-            <td>{{ t('YES') }}</td>
-          </tr>
-          <tr *ngIf="warData.missingInfo.emptySlots > 0" class="empty-slot-row">
-            <td><em>{{ warData.missingInfo.emptySlots }} {{ t('EMPTY_SLOTS') }}</em></td>
-            <td><span class="badge danger">{{ warData.missingInfo.emptySlotsDecks }} {{ t('DECKS_LABEL') }}</span></td>
-            <td>-</td>
-            <td>{{ t('NO') }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>{{ t('TH_PLAYER') }}</th>
+              <th>{{ t('TH_MISSING_TODAY') }}</th>
+              <th>{{ t('TH_LAST_SEEN') }}</th>
+              <th>{{ t('TH_IN_CLAN') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let player of warData.missingInfo.missingPlayers">
+              <td>{{ player.name }}</td>
+              <td>
+                <span class="badge" [ngClass]="player.missingDecks === 4 ? 'danger' : 'warning'">
+                  {{ player.missingDecks }} {{ t('DECKS_LABEL') }}
+                </span>
+              </td>
+              <td>{{ player.lastSeen }}</td>
+              <td>{{ t('YES') }}</td>
+            </tr>
+            <tr *ngIf="warData.missingInfo.emptySlots > 0" class="empty-slot-row">
+              <td><em>{{ warData.missingInfo.emptySlots }} {{ t('EMPTY_SLOTS') }}</em></td>
+              <td><span class="badge danger">{{ warData.missingInfo.emptySlotsDecks }} {{ t('DECKS_LABEL') }}</span></td>
+              <td>-</td>
+              <td>{{ t('NO') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- TABLE 3: Missed Attacks History -->
     <div class="card">
       <h3>{{ t('TITLE_MISSED_HISTORY') }}</h3>
-      <table class="data-table" *ngIf="warData.missed.players && warData.missed.players.length > 0; else noMissed">
-        <thead>
-          <tr>
-            <th>{{ t('TH_PLAYER') }}</th>
-            <th>{{ t('TH_MISSED_DECKS') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let player of warData.missed.players">
-            <td>{{ player.Name }}</td>
-            <td><span class="badge danger">{{ player.Missing }} {{ t('DECKS_LABEL') }}</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive" *ngIf="warData.missed.players && warData.missed.players.length > 0; else noMissed">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>{{ t('TH_PLAYER') }}</th>
+              <th>{{ t('TH_MISSED_DECKS') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let player of warData.missed.players">
+              <td>{{ player.Name }}</td>
+              <td><span class="badge danger">{{ player.Missing }} {{ t('DECKS_LABEL') }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <ng-template #noMissed>
         <p class="empty-msg">{{ t('NO_MISSED_MSG') }}</p>
       </ng-template>
