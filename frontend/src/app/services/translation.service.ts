@@ -34,7 +34,8 @@ export class TranslationService {
       TITLE_MISSED_HISTORY: '3. Histórico de Ataques Perdedores / Não Realizados na Semana',
       TH_MISSED_DECKS: 'Decks Perderam nos Dias Anteriores',
       NO_MISSED_MSG: 'Nenhum jogador perdeu ataques nos dias anteriores desta semana!',
-      FOOTER_TEXT: 'Desenvolvido com ❤️ por'
+      FOOTER_TEXT: 'Desenvolvido com ❤️ por',
+      RECENT_SEARCHES: 'RECENTES:'
     },
     en: {
       SEARCH_TITLE: 'Clan War Lookup',
@@ -59,7 +60,8 @@ export class TranslationService {
       TITLE_MISSED_HISTORY: '3. History of Missed / Lost Attacks This Week',
       TH_MISSED_DECKS: 'Decks Missed in Previous Days',
       NO_MISSED_MSG: 'No players missed attacks in previous days this week!',
-      FOOTER_TEXT: 'Developed with ❤️ by'
+      FOOTER_TEXT: 'Developed with ❤️ by',
+      RECENT_SEARCHES: 'RECENT:'
     }
   };
 

@@ -403,3 +403,10 @@
     font-size: 12px;
   }
 }
+
+.clan-tag-sub {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 1px;
+}

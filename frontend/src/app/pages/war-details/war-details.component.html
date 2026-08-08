@@ -34,7 +34,7 @@
 
     <!-- Chips de Buscas Recentes -->
     <div class="recent-tags-container" *ngIf="recentTags.length > 0">
-      <span class="recent-label">RECENTES:</span>
+      <span class="recent-label">{{ t('RECENT_SEARCHES') }}</span>
       <div class="tag-chips">
         <span
           *ngFor="let tag of recentTags"
@@ -54,7 +54,7 @@
     <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
   </div>
 
-  <!-- Results Block -->
+  <!-- Results Block (displayed only without errors and when data is available) -->
   <div *ngIf="warData && !loading && !errorMsg">
 
     <!-- TABLE 1: General Classification -->
@@ -76,24 +76,34 @@
           </thead>
           <tbody>
             <tr *ngFor="let clan of warData.warInfo.clansInfos">
+              <!-- NAME, TAG & TROPHIES -->
               <td>
                 <div class="cell-primary">{{ clan.Name }}</div>
+                <div class="clan-tag-sub" *ngIf="clan.Tag">{{ clan.Tag }}</div>
                 <div class="cell-sub text-muted">🎖️ {{ clan.ClanScore }}</div>
               </td>
+
+              <!-- CURRENT & AVERAGE -->
               <td>
                 <div class="cell-primary">🛡️ {{ clan.Total }}</div>
                 <div class="cell-sub text-muted">{{ clan.Average }}</div>
               </td>
+
+              <!-- PLAYERS, USED DECKS & MISSING DECKS -->
               <td>
                 <div class="cell-primary">👤 {{ clan.PlayersToday }}/50</div>
                 <div class="cell-sub text-success">✔️ {{ clan.DecksToday }}</div>
                 <div class="cell-sub text-danger">⏰ {{ clan.MissingAttacksToday }}</div>
               </td>
+
+              <!-- PERSPECTIVE (Min: Red, Estimation: Orange, Max: Green) -->
               <td>
                 <div class="cell-sub text-danger">🔴 {{ clan.MinPoints }}</div>
                 <div class="cell-sub text-warning">🟠 {{ clan.Estimation }}</div>
                 <div class="cell-sub text-success">🟢 {{ clan.MaxPoints }}</div>
               </td>
+
+              <!-- OVERALL (Calculation Breakdown: Current, Boat, Bonus & Total) -->
               <td>
                 <div class="cell-sub text-success">✔️ {{ clan.Fame }}</div>
                 <div class="cell-sub text-success math-indent">⛵ +{{ clan.BoatPoints }}</div>
