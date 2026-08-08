@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WarService } from '../../services/war.service';
+import { TranslationService, Language } from '../../services/translation.service';
 import { WarDetailsResponse } from '../../models/war.model';
 
 @Component({
@@ -19,11 +20,23 @@ export class WarDetailsComponent implements OnInit {
 
   constructor(
     private warService: WarService,
+    public translationService: TranslationService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.searchWar();
+  }
+
+  switchLanguage(lang: Language): void {
+    this.translationService.setLanguage(lang);
+    if (this.errorMsg) {
+      this.errorMsg = this.t('ERR_SEARCH');
+    }
+  }
+
+  t(key: string): string {
+    return this.translationService.translate(key);
   }
 
   searchWar(): void {
@@ -40,8 +53,8 @@ export class WarDetailsComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro na requisição:', err);
-        this.errorMsg = 'Erro ao buscar dados do clã. Verifique a Tag digitada e se o clã está em guerra.';
-        this.warData = null; // Apaga as tabelas em caso de erro
+        this.errorMsg = this.t('ERR_SEARCH');
+        this.warData = null;
         this.loading = false;
         this.cdr.detectChanges();
       }
