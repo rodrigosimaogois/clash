@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { ItemListComponent } from './pages/item-list/item-list.component';
+import { WarDetailsComponent } from './pages/war-details/war-details.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ItemListComponent],
-  template: `<app-item-list></app-item-list>`
+  imports: [WarDetailsComponent],
+  template: `<app-war-details></app-war-details>` // <--- Define o template diretamente aqui
 })
-export class App {}
+export class App {
+  title = 'clash-war-app';
+}

@@ -1,0 +1,114 @@
+<div class="container">
+
+  <!-- Form de Busca por Tag -->
+  <div class="search-box card">
+    <h2>Consulta de Guerra de Clãs</h2>
+    <div class="input-group">
+      <span class="hashtag">#</span>
+      <input
+        type="text"
+        [(ngModel)]="inputTag"
+        placeholder="Digite a Tag do Clã (ex: PUVPQPGL)"
+        (keyup.enter)="searchWar()"
+      />
+      <button (click)="searchWar()" [disabled]="loading">
+        {{ loading ? 'Buscando...' : 'Buscar' }}
+      </button>
+    </div>
+    <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+  </div>
+
+  <div *ngIf="warData && !loading">
+
+    <!-- TABELA 1: Classificação dos Clãs -->
+    <div class="card">
+      <h3>1. Classificação Geral da Guerra ({{ warData.warInfo.clanName }})</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Clã</th>
+            <th>Pontos Hoje</th>
+            <th>Jogadores Hoje</th>
+            <th>Decks Usados Hoje</th>
+            <th>Ataques Faltantes Hoje</th>
+            <th>Média / Deck</th>
+            <th>Pontuação Final Estimada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let clan of warData.warInfo.clansInfos">
+            <td><strong>{{ clan.Name }}</strong></td>
+            <td>{{ clan.Total }}</td>
+            <td>{{ clan.PlayersToday }}</td>
+            <td>{{ clan.DecksToday }}</td>
+            <td>{{ clan.MissingAttacksToday }}</td>
+            <td>{{ clan.Average }}</td>
+            <td><strong>{{ clan.FinalPosition }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TABELA 2: Decks Faltantes Hoje -->
+    <div class="card">
+      <div class="card-header">
+        <h3>2. Membros com Decks Pendentes Hoje</h3>
+        <span class="badge info" *ngIf="warData.missingInfo.summary">
+          {{ warData.missingInfo.summary }}
+        </span>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Jogador</th>
+            <th>Decks Faltantes Hoje</th>
+            <th>Visto por último</th>
+            <th>No Clã</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of warData.missingInfo.missingPlayers">
+            <td>{{ player.name }}</td>
+            <td>
+              <span class="badge" [ngClass]="player.missingDecks === 4 ? 'danger' : 'warning'">
+                {{ player.missingDecks }} decks
+              </span>
+            </td>
+            <td>{{ player.lastSeen }}</td>
+            <td>Sim</td>
+          </tr>
+          <tr *ngIf="warData.missingInfo.emptySlots > 0" class="empty-slot-row">
+            <td><em>{{ warData.missingInfo.emptySlots }} Vaga(s) Vazia(s) / Ex-membros</em></td>
+            <td><span class="badge danger">{{ warData.missingInfo.emptySlotsDecks }} decks</span></td>
+            <td>-</td>
+            <td>Não</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TABELA 3: Histórico de Faltas na Semana -->
+    <div class="card">
+      <h3>3. Histórico de Ataques Perdedores / Não Realizados na Semana</h3>
+      <table class="data-table" *ngIf="warData.missed.players && warData.missed.players.length > 0; else noMissed">
+        <thead>
+          <tr>
+            <th>Jogador</th>
+            <th>Decks Perderam nos Dias Anteriores</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of warData.missed.players">
+            <td>{{ player.Name }}</td>
+            <td><span class="badge danger">{{ player.Missing }} decks</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noMissed>
+        <p class="empty-msg">Nenhum jogador perdeu ataques nos dias anteriores desta semana!</p>
+      </ng-template>
+    </div>
+
+  </div>
+</div>
