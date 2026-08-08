@@ -334,3 +334,17 @@
     font-size: 12px;
   }
 }
+
+.app-footer {
+  text-align: center;
+  padding: 24px 0 12px 0;
+  margin-top: 16px;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.app-footer strong {
+  color: #0f172a;
+  font-weight: 600;
+}
