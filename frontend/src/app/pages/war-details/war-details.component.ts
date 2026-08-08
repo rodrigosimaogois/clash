@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WarService } from '../../services/war.service';
@@ -17,7 +17,10 @@ export class WarDetailsComponent implements OnInit {
   loading: boolean = false;
   errorMsg: string = '';
 
-  constructor(private warService: WarService) {}
+  constructor(
+    private warService: WarService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.searchWar();
@@ -33,12 +36,14 @@ export class WarDetailsComponent implements OnInit {
       next: (data) => {
         this.warData = data;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error(err);
-        this.errorMsg = 'Erro ao buscar dados do clã. Verifique a Tag digitada.';
+        console.error('Erro na requisição:', err);
+        this.errorMsg = 'Erro ao buscar dados do clã. Verifique a Tag digitada e se o clã está em guerra.';
+        this.warData = null; // Apaga as tabelas em caso de erro
         this.loading = false;
-        this.warData = null;
+        this.cdr.detectChanges();
       }
     });
   }

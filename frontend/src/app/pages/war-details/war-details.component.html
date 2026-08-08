@@ -8,7 +8,7 @@
       <input
         type="text"
         [(ngModel)]="inputTag"
-        placeholder="Digite a Tag do Clã (ex: PUVPQPGL)"
+        placeholder="Digite a Tag do Clã (ex: 20RGVR8)"
         (keyup.enter)="searchWar()"
       />
       <button (click)="searchWar()" [disabled]="loading">
@@ -18,32 +18,60 @@
     <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
   </div>
 
-  <div *ngIf="warData && !loading">
+  <!-- Bloco de Resultados (exibe apenas sem erro e com dados) -->
+  <div *ngIf="warData && !loading && !errorMsg">
 
-    <!-- TABELA 1: Classificação dos Clãs -->
+    <!-- TABELA 1: Classificação Geral -->
     <div class="card">
-      <h3>1. Classificação Geral da Guerra ({{ warData.warInfo.clanName }})</h3>
-      <table class="data-table">
+      <h3 class="main-title">
+        {{ warData.warInfo.clanName }} <span class="clan-tag">(#{{ inputTag.replace('#', '').toUpperCase() }})</span>
+      </h3>
+
+      <table class="data-table cr-theme-light">
         <thead>
           <tr>
-            <th>Clã</th>
-            <th>Pontos Hoje</th>
-            <th>Jogadores Hoje</th>
-            <th>Decks Usados Hoje</th>
-            <th>Ataques Faltantes Hoje</th>
-            <th>Média / Deck</th>
-            <th>Pontuação Final Estimada</th>
+            <th>NOME</th>
+            <th>ATUAL</th>
+            <th>DECKS</th>
+            <th>PERSP</th>
+            <th>GERAL</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let clan of warData.warInfo.clansInfos">
-            <td><strong>{{ clan.Name }}</strong></td>
-            <td>{{ clan.Total }}</td>
-            <td>{{ clan.PlayersToday }}</td>
-            <td>{{ clan.DecksToday }}</td>
-            <td>{{ clan.MissingAttacksToday }}</td>
-            <td>{{ clan.Average }}</td>
-            <td><strong>{{ clan.FinalPosition }}</strong></td>
+            <!-- NOME & TROFÉUS -->
+            <td>
+              <div class="cell-primary">{{ clan.Name }}</div>
+              <div class="cell-sub text-muted">🎖️ {{ clan.ClanScore }}</div>
+            </td>
+
+            <!-- ATUAL & MÉDIA -->
+            <td>
+              <div class="cell-primary">🛡️ {{ clan.Total }}</div>
+              <div class="cell-sub text-muted">{{ clan.Average }}</div>
+            </td>
+
+            <!-- JOGADORES, DECKS USADOS & FALTANTES -->
+            <td>
+              <div class="cell-primary">👤 {{ clan.PlayersToday }}/50</div>
+              <div class="cell-sub text-success">✔️ {{ clan.DecksToday }}</div>
+              <div class="cell-sub text-danger">⏰ {{ clan.MissingAttacksToday }}</div>
+            </td>
+
+            <!-- PERSPECTIVA (Mínima: Vermelho, Média: Laranja, Máxima: Verde) -->
+            <td>
+              <div class="cell-sub text-danger">🔴 {{ clan.MinPoints }}</div>
+              <div class="cell-sub text-warning">🟠 {{ clan.Estimation }}</div>
+              <div class="cell-sub text-success">🟢 {{ clan.MaxPoints }}</div>
+            </td>
+
+            <!-- GERAL (Conta de Soma: Atual, Barco, Bônus e Total) -->
+            <td>
+              <div class="cell-sub text-success">✔️ {{ clan.Fame }}</div>
+              <div class="cell-sub text-success">⛵ +{{ clan.BoatPoints }}</div>
+              <div class="cell-sub text-info math-indent">+{{ clan.PositionBonus }}</div>
+              <div class="cell-sub text-danger math-total">🎯 {{ clan.FinalPosition }}</div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -88,7 +116,7 @@
       </table>
     </div>
 
-    <!-- TABELA 3: Histórico de Faltas na Semana -->
+    <!-- TABELA 3: Histórico de Faltas -->
     <div class="card">
       <h3>3. Histórico de Ataques Perdedores / Não Realizados na Semana</h3>
       <table class="data-table" *ngIf="warData.missed.players && warData.missed.players.length > 0; else noMissed">
