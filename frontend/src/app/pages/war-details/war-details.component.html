@@ -54,11 +54,11 @@
     <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
   </div>
 
-  <!-- Results Block (displayed only without errors and when data is available) -->
+  <!-- Results Block -->
   <div *ngIf="warData && !loading && !errorMsg">
 
     <!-- TABLE 1: General Classification -->
-    <div class="card">
+    <div class="card" *ngIf="warData.warInfo">
       <h3 class="main-title">
         {{ warData.warInfo.clanName }} <span class="clan-tag">(#{{ inputTag.replace('#', '').toUpperCase() }})</span>
       </h3>
@@ -80,12 +80,12 @@
               <td>
                 <div class="cell-primary">{{ clan.Name }}</div>
                 <div class="clan-tag-sub" *ngIf="clan.Tag">{{ clan.Tag }}</div>
-                <div class="cell-sub text-muted">🎖️ {{ clan.ClanScore }}</div>
+                <div class="cell-sub text-muted">🏆 {{ clan.ClanScore }}</div>
               </td>
 
               <!-- CURRENT & AVERAGE -->
               <td>
-                <div class="cell-primary">🛡️ {{ clan.Total }}</div>
+                <div class="cell-primary">🎖️ {{ clan.Total }}</div>
                 <div class="cell-sub text-muted">{{ clan.Average }}</div>
               </td>
 
@@ -96,14 +96,14 @@
                 <div class="cell-sub text-danger">⏰ {{ clan.MissingAttacksToday }}</div>
               </td>
 
-              <!-- PERSPECTIVE (Min: Red, Estimation: Orange, Max: Green) -->
+              <!-- PERSPECTIVE -->
               <td>
                 <div class="cell-sub text-danger">🔴 {{ clan.MinPoints }}</div>
                 <div class="cell-sub text-warning">🟠 {{ clan.Estimation }}</div>
                 <div class="cell-sub text-success">🟢 {{ clan.MaxPoints }}</div>
               </td>
 
-              <!-- OVERALL (Calculation Breakdown: Current, Boat, Bonus & Total) -->
+              <!-- OVERALL -->
               <td>
                 <div class="cell-sub text-success">✔️ {{ clan.Fame }}</div>
                 <div class="cell-sub text-success math-indent">⛵ +{{ clan.BoatPoints }}</div>
@@ -117,7 +117,7 @@
     </div>
 
     <!-- TABLE 2: Pending Decks Today -->
-    <div class="card">
+    <div class="card" *ngIf="warData.missingInfo">
       <div class="card-header">
         <h3>{{ t('TITLE_PENDING_DECKS') }}</h3>
         <span class="badge info" *ngIf="warData.missingInfo.summary">
@@ -158,7 +158,7 @@
     </div>
 
     <!-- TABLE 3: Missed Attacks History -->
-    <div class="card">
+    <div class="card" *ngIf="warData.missed">
       <h3>{{ t('TITLE_MISSED_HISTORY') }}</h3>
       <div class="table-responsive" *ngIf="warData.missed.players && warData.missed.players.length > 0; else noMissed">
         <table class="data-table">
