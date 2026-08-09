@@ -1,21 +1,22 @@
 version: '3.8'
 
 services:
+  # API Node.js
   api:
     build: ./api
     container_name: clash_api
     restart: always
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     env_file:
       - .env
 
+  # Frontend Angular + NGINX
   frontend:
-      build: ./frontend
-      container_name: clash_frontend
-      restart: always
-      ports:
-        - "4200:4200"
-      command: npx ng serve --host 0.0.0.0 --port 4200 --allowed-hosts=all
-      depends_on:
-        - api
+    build: ./frontend
+    container_name: clash_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - api
