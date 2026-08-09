@@ -35,7 +35,18 @@ export class TranslationService {
       TH_MISSED_DECKS: 'Decks Perderam nos Dias Anteriores',
       NO_MISSED_MSG: 'Nenhum jogador perdeu ataques nos dias anteriores desta semana!',
       FOOTER_TEXT: 'Desenvolvido com ❤️ por',
-      RECENT_SEARCHES: 'RECENTES:'
+      RECENT_SEARCHES: 'RECENTES:',
+      CONFIG_TITLE: 'Gerenciador de Token API',
+      CONFIG_SUBTITLE: 'Atualize o Bearer Token do Clash Royale no servidor.',
+      CONFIG_STATUS_LABEL: 'Status do Server',
+      CONFIG_STATUS_OK: 'Token Configurado',
+      CONFIG_STATUS_NOK: 'Não Configurado',
+      CONFIG_PREVIEW: 'Preview',
+      CONFIG_SECRET_LABEL: 'Admin Secret Key',
+      CONFIG_SECRET_PLACEHOLDER: 'Chave de administrador do server',
+      CONFIG_TOKEN_LABEL: 'Novo Clash API Token',
+      CONFIG_BTN_SAVE: '💾 Atualizar no Servidor',
+      CONFIG_BTN_SAVING: 'Enviando...'
     },
     en: {
       SEARCH_TITLE: 'Clan War Lookup',
@@ -61,7 +72,18 @@ export class TranslationService {
       TH_MISSED_DECKS: 'Decks Missed in Previous Days',
       NO_MISSED_MSG: 'No players missed attacks in previous days this week!',
       FOOTER_TEXT: 'Developed with ❤️ by',
-      RECENT_SEARCHES: 'RECENT:'
+      RECENT_SEARCHES: 'RECENT:',
+      CONFIG_TITLE: 'API Token Manager',
+      CONFIG_SUBTITLE: 'Update the Clash Royale Bearer Token on the server.',
+      CONFIG_STATUS_LABEL: 'Server Status',
+      CONFIG_STATUS_OK: 'Token Configured',
+      CONFIG_STATUS_NOK: 'Not Configured',
+      CONFIG_PREVIEW: 'Preview',
+      CONFIG_SECRET_LABEL: 'Admin Secret Key',
+      CONFIG_SECRET_PLACEHOLDER: 'Server admin secret key',
+      CONFIG_TOKEN_LABEL: 'New Clash API Token',
+      CONFIG_BTN_SAVE: '💾 Update on Server',
+      CONFIG_BTN_SAVING: 'Saving...'
     }
   };
 

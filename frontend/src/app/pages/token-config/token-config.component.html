@@ -1,0 +1,95 @@
+<!-- Floating Language Selector -->
+<div class="lang-switch-floating">
+  <button
+    type="button"
+    [class.active]="translationService.currentLang === 'pt'"
+    (click)="switchLanguage('pt')">
+    🇧🇷 PT
+  </button>
+  <button
+    type="button"
+    [class.active]="translationService.currentLang === 'en'"
+    (click)="switchLanguage('en')">
+    🇺🇸 EN
+  </button>
+</div>
+
+<div class="container">
+  <div class="card token-card">
+    <h2>🔑 {{ t('CONFIG_TITLE') }}</h2>
+    <p class="subtitle">{{ t('CONFIG_SUBTITLE') }}</p>
+
+    <!-- Token Preview Status -->
+    <div class="status-box" [class.online]="isConfigured">
+      <span class="status-indicator"></span>
+      <div>
+        <strong>{{ t('CONFIG_STATUS_LABEL') }}:</strong>
+        {{ isConfigured ? t('CONFIG_STATUS_OK') : t('CONFIG_STATUS_NOK') }}
+        <div class="preview-text" *ngIf="tokenPreview">
+          {{ t('CONFIG_PREVIEW') }}: {{ tokenPreview }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Secret Input -->
+    <div class="form-group">
+      <label for="adminSecret">{{ t('CONFIG_SECRET_LABEL') }}</label>
+      <div class="input-wrapper">
+        <input
+          id="adminSecret"
+          [type]="showSecret ? 'text' : 'password'"
+          [(ngModel)]="adminSecret"
+          [placeholder]="t('CONFIG_SECRET_PLACEHOLDER')"
+          autocomplete="off"
+        />
+        <button
+          type="button"
+          class="btn-icon"
+          (click)="showSecret = !showSecret">
+          {{ showSecret ? '👁️‍🗨️' : '👁️' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- New Token Input (Textarea version) -->
+    <div class="form-group">
+      <label for="newToken">{{ t('CONFIG_TOKEN_LABEL') }}</label>
+      <div class="input-wrapper textarea-container">
+        <!-- Masking controlled via dynamic CSS class -->
+        <textarea
+          id="newToken"
+          [class.masked]="!showToken"
+          [(ngModel)]="newToken"
+          placeholder="eyJhbGciOiJKV1QiLCJhbGci..."
+          autocomplete="off"
+          rows="6"
+        ></textarea>
+        <button
+          type="button"
+          class="btn-icon btn-icon-textarea"
+          (click)="showToken = !showToken">
+          {{ showToken ? '👁️‍🗨️' : '👁️' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Feedback Alerts -->
+    <p class="msg success" *ngIf="successMsg">✅ {{ successMsg }}</p>
+    <p class="msg error" *ngIf="errorMsg">❌ {{ errorMsg }}</p>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="saveToken()"
+        [disabled]="loading || !newToken.trim() || !adminSecret.trim()">
+        {{ loading ? t('CONFIG_BTN_SAVING') : t('CONFIG_BTN_SAVE') }}
+      </button>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>{{ t('FOOTER_TEXT') }} <strong>Rodrigo Simão Gois</strong></p>
+  </footer>
+</div>

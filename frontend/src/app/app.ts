@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { WarDetailsComponent } from './pages/war-details/war-details.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [WarDetailsComponent],
-  template: `<app-war-details></app-war-details>` // <--- Define o template diretamente aqui
+  imports: [RouterOutlet],
+  template: `<router-outlet />`
 })
 export class App {
-  title = 'clash-war-app';
+  // App initialization logic
 }
