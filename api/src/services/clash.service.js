@@ -22,7 +22,9 @@ export const ClashService = {
     });
 
     if (!response.ok) {
-      throw new Error(`Clash Royale API error: ${response.status} ${response.statusText}`);
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage = errorData.message || errorData.reason || response.statusText;
+      throw new Error(`Clash Royale API error: ${response.status} ${errorMessage}`);
     }
 
     return await response.json();

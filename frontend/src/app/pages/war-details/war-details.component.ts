@@ -64,7 +64,15 @@ export class WarDetailsComponent implements OnInit {
       },
       error: (err) => {
         console.error('Request error:', err);
-        this.errorMsg = this.t('ERR_SEARCH');
+
+        if (err.status === 0) {
+          this.errorMsg = this.t('ERR_OFFLINE');
+        }
+        else {
+          const apiMessage = err?.error?.details || err?.error?.message || err?.error?.error || err?.error?.reason;
+          this.errorMsg = apiMessage || this.t('ERR_SEARCH');
+        }
+
         this.warData = null;
         this.loading = false;
         this.cdr.detectChanges();
