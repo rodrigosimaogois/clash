@@ -1,14 +1,14 @@
-# Estágio 1: Build da aplicação Angular
-FROM node:20-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npx ng build --configuration production
+FROM node:20-alpine
 
-# Estágio 2: Servidor web de produção (Nginx)
-FROM nginx:alpine
-COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 4200
+
+# Usamos --allowed-hosts=all no lugar de --disable-host-check
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--allowed-hosts=all"]
