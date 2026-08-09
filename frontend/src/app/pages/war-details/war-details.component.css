@@ -194,15 +194,15 @@
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
 .data-table {
   width: 100%;
-  border-collapse: separate;
+  border-collapse: separate; /* OBRIGATÓRIO para funcionar o sticky */
   border-spacing: 0;
   margin-top: 8px;
   border-radius: 8px;
-  overflow: hidden;
   border: 1px solid #e2e8f0;
   white-space: nowrap;
 }
@@ -231,16 +231,48 @@
   transition: background-color 0.15s ease;
 }
 
-.cr-theme-light tbody tr:nth-child(even) {
-  background-color: #f8fafc;
+/* --- Configuração de Coluna Fixa (Sticky First Column) --- */
+.data-table th.sticky-col,
+.data-table td.sticky-col,
+.data-table th:first-child,
+.data-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.12);
 }
 
-.cr-theme-light tbody tr:nth-child(odd) {
-  background-color: #ffffff;
+.data-table th:first-child,
+.data-table th.sticky-col {
+  z-index: 3;
+  background-color: #f8fafc !important;
 }
 
-.cr-theme-light tbody tr:hover {
-  background-color: #f1f5f9;
+/* Tratamento de cor opaca para o zebrado não ficar transparente */
+.cr-theme-light tbody tr:nth-child(odd) td:first-child,
+.cr-theme-light tbody tr:nth-child(odd) td.sticky-col,
+.data-table tbody tr:nth-child(odd) td:first-child,
+.data-table tbody tr:nth-child(odd) td.sticky-col {
+  background-color: #ffffff !important;
+}
+
+.cr-theme-light tbody tr:nth-child(even) td:first-child,
+.cr-theme-light tbody tr:nth-child(even) td.sticky-col,
+.data-table tbody tr:nth-child(even) td:first-child,
+.data-table tbody tr:nth-child(even) td.sticky-col {
+  background-color: #f8fafc !important;
+}
+
+.cr-theme-light tbody tr:hover td:first-child,
+.cr-theme-light tbody tr:hover td.sticky-col,
+.data-table tbody tr:hover td:first-child,
+.data-table tbody tr:hover td.sticky-col {
+  background-color: #f1f5f9 !important;
+}
+
+.data-table tbody tr.empty-slot-row td:first-child,
+.data-table tbody tr.empty-slot-row td.sticky-col {
+  background-color: #f8fafc !important;
 }
 
 /* --- Cells and Typography --- */

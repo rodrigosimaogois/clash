@@ -32,7 +32,7 @@
       </button>
     </div>
 
-    <!-- Chips de Buscas Recentes -->
+    <!-- Recent Searches Chips -->
     <div class="recent-tags-container" *ngIf="recentTags.length > 0">
       <span class="recent-label">{{ t('RECENT_SEARCHES') }}</span>
       <div class="tag-chips">
@@ -67,7 +67,7 @@
         <table class="data-table cr-theme-light">
           <thead>
             <tr>
-              <th>{{ t('TH_NAME') }}</th>
+              <th class="sticky-col">{{ t('TH_NAME') }}</th>
               <th>{{ t('TH_CURRENT') }}</th>
               <th>{{ t('TH_DECKS') }}</th>
               <th>{{ t('TH_PERSP') }}</th>
@@ -77,7 +77,7 @@
           <tbody>
             <tr *ngFor="let clan of warData.warInfo.clansInfos">
               <!-- NAME, TAG & TROPHIES -->
-              <td>
+              <td class="sticky-col">
                 <div class="cell-primary">{{ clan.Name }}</div>
                 <div class="clan-tag-sub" *ngIf="clan.Tag">{{ clan.Tag }}</div>
                 <div class="cell-sub text-muted">🏆 {{ clan.ClanScore }}</div>
@@ -131,7 +131,7 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>{{ t('TH_PLAYER') }}</th>
+              <th class="sticky-col">{{ t('TH_PLAYER') }}</th>
               <th>{{ t('TH_MISSING_TODAY') }}</th>
               <th>{{ t('TH_LAST_SEEN') }}</th>
               <th>{{ t('TH_IN_CLAN') }}</th>
@@ -139,7 +139,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let player of warData.missingInfo.missingPlayers">
-              <td>{{ player.name }}</td>
+              <td class="sticky-col">{{ player.name }}</td>
               <td>
                 <span class="badge" [ngClass]="player.missingDecks === 4 ? 'danger' : 'warning'">
                   {{ player.missingDecks }} {{ t('DECKS_LABEL') }}
@@ -149,7 +149,7 @@
               <td>{{ t('YES') }}</td>
             </tr>
             <tr *ngIf="warData.missingInfo.emptySlots > 0" class="empty-slot-row">
-              <td><em>{{ warData.missingInfo.emptySlots }} {{ t('EMPTY_SLOTS') }}</em></td>
+              <td class="sticky-col"><em>{{ warData.missingInfo.emptySlots }} {{ t('EMPTY_SLOTS') }}</em></td>
               <td><span class="badge danger">{{ warData.missingInfo.emptySlotsDecks }} {{ t('DECKS_LABEL') }}</span></td>
               <td>-</td>
               <td>{{ t('NO') }}</td>
@@ -166,13 +166,13 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>{{ t('TH_PLAYER') }}</th>
+              <th class="sticky-col">{{ t('TH_PLAYER') }}</th>
               <th>{{ t('TH_MISSED_DECKS') }}</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let player of warData.missed.players">
-              <td>{{ player.Name }}</td>
+              <td class="sticky-col">{{ player.Name }}</td>
               <td><span class="badge danger">{{ player.Missing }} {{ t('DECKS_LABEL') }}</span></td>
             </tr>
           </tbody>
