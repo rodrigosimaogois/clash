@@ -19,7 +19,7 @@ export interface UpdateTokenResponse {
 })
 export class ConfigService {
   // Added the /api prefix to match your backend routing structure
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {}
 

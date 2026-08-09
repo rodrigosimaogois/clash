@@ -7,7 +7,7 @@ import { WarDetailsResponse } from '../models/war.model';
   providedIn: 'root'
 })
 export class WarService {
-  private apiUrl = 'http://localhost:3000/api/war'; // Ajuste para a URL da sua API
+  private apiUrl = '/api/war'; // Ajuste para a URL da sua API
 
   constructor(private http: HttpClient) {}
 
