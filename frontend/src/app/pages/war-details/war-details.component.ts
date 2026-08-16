@@ -19,6 +19,10 @@ export class WarDetailsComponent implements OnInit {
   errorMsg: string = '';
   recentTags: string[] = [];
 
+  pixKey: string = '8088cb28-faf9-4ed3-986b-af5cb0ed2610';
+  payPalUrl: string = 'https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=rodrigosimaogois@hotmail.com&currency_code=BRL';
+  copiedPix: boolean = false;
+
   constructor(
     private warService: WarService,
     public translationService: TranslationService,
@@ -88,11 +92,17 @@ export class WarDetailsComponent implements OnInit {
       } catch (e) {
         this.recentTags = [];
       }
+    } else {
+      this.recentTags = [];
     }
   }
 
   private saveTagToCache(tag: string): void {
     const cleanTag = tag.replace('#', '').toUpperCase().trim();
+
+    // Recarrega do localStorage para garantir sincronia caso algo tenha mudado
+    this.loadRecentTags();
+
     let updated = [cleanTag, ...this.recentTags.filter(t => t !== cleanTag)];
     updated = updated.slice(0, 5); // Limita às 5 mais recentes
 
@@ -104,5 +114,16 @@ export class WarDetailsComponent implements OnInit {
     event.stopPropagation();
     this.recentTags = this.recentTags.filter(tag => tag !== tagToRemove);
     localStorage.setItem('clash_recent_tags', JSON.stringify(this.recentTags));
+  }
+
+  copyPixKey(): void {
+    navigator.clipboard.writeText(this.pixKey).then(() => {
+      this.copiedPix = true;
+      setTimeout(() => {
+        this.copiedPix = false;
+        this.cdr.detectChanges();
+      }, 2000);
+      this.cdr.detectChanges();
+    });
   }
 }

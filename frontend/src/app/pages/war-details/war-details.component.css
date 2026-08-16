@@ -377,18 +377,123 @@
   border-color: #2563eb;
 }
 
+.clan-tag-sub {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.badge-avg {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  color: #64748b;
+  background-color: #e2e8f0;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-left: 3px;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+/* --- Footer & Donations --- */
 .app-footer {
   text-align: center;
-  padding: 24px 0 12px 0;
-  margin-top: 16px;
+  padding: 24px 0 16px 0;
+  margin-top: 24px;
   border-top: 1px solid #e2e8f0;
   color: #64748b;
   font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .app-footer strong {
   color: #0f172a;
   font-weight: 600;
+}
+
+.donation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.donation-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.donation-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.donation-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.donation-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Pix Styling */
+.donation-chip.pix {
+  border-color: #a7f3d0;
+  background-color: #f0fdf4;
+  color: #166534;
+}
+
+.donation-chip.pix:hover {
+  background-color: #dcfce7;
+}
+
+.pix-icon {
+  font-weight: bold;
+  color: #059669;
+}
+
+.key-text {
+  font-weight: 700;
+}
+
+.copy-status {
+  font-size: 11px;
+}
+
+/* PayPal Styling */
+.donation-chip.paypal {
+  border-color: #bfdbfe;
+  background-color: #eff6ff;
+  color: #1e40af;
+}
+
+.donation-chip.paypal:hover {
+  background-color: #dbeafe;
 }
 
 /* --- Mobile & Small Screen Optimizations --- */
@@ -434,24 +539,4 @@
   .cell-sub {
     font-size: 12px;
   }
-}
-
-.clan-tag-sub {
-  font-size: 11px;
-  color: #64748b;
-  font-weight: 500;
-  margin-top: 1px;
-}
-
-.badge-avg {
-  display: inline-block;
-  font-size: 9px;
-  font-weight: 700;
-  color: #64748b;
-  background-color: #e2e8f0;
-  padding: 1px 4px;
-  border-radius: 4px;
-  margin-left: 3px;
-  letter-spacing: 0.05em;
-  vertical-align: middle;
 }

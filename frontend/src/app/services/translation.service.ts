@@ -47,7 +47,8 @@ export class TranslationService {
       CONFIG_SECRET_PLACEHOLDER: 'Chave de administrador do server',
       CONFIG_TOKEN_LABEL: 'Novo Clash API Token',
       CONFIG_BTN_SAVE: '💾 Atualizar no Servidor',
-      CONFIG_BTN_SAVING: 'Enviando...'
+      CONFIG_BTN_SAVING: 'Enviando...',
+      DONATION_TITLE: 'Apoie o Projeto'
     },
     en: {
       SEARCH_TITLE: 'Clan War Lookup',
@@ -85,7 +86,8 @@ export class TranslationService {
       CONFIG_SECRET_PLACEHOLDER: 'Server admin secret key',
       CONFIG_TOKEN_LABEL: 'New Clash API Token',
       CONFIG_BTN_SAVE: '💾 Update on Server',
-      CONFIG_BTN_SAVING: 'Saving...'
+      CONFIG_BTN_SAVING: 'Saving...',
+      DONATION_TITLE: 'Support the Project'
     }
   };
 

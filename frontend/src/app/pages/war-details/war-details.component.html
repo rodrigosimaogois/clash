@@ -185,9 +185,25 @@
 
   </div>
 
-  <!-- Footer Signature -->
+  <!-- Footer Signature & Donation -->
   <footer class="app-footer">
     <p>{{ t('FOOTER_TEXT') }} <strong>Rodrigo Simão Gois</strong></p>
+
+    <div class="donation-container">
+      <span class="donation-title">{{ t('DONATION_TITLE') }}</span>
+      <div class="donation-badges">
+        <!-- Pix Badge / Copy -->
+        <button type="button" class="donation-chip pix" (click)="copyPixKey()" [title]="t('COPY_PIX')">
+          <span class="pix-icon">❖</span> Pix: <strong class="key-text">{{ pixKey }}</strong>
+          <span class="copy-status" *ngIf="copiedPix">✔️</span>
+        </button>
+
+        <!-- PayPal Link -->
+        <a [href]="payPalUrl" target="_blank" rel="noopener noreferrer" class="donation-chip paypal">
+          <span>🅿️</span> PayPal
+        </a>
+      </div>
+    </div>
   </footer>
 
 </div>
